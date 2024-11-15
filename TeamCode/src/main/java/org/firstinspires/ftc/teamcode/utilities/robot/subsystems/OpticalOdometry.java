@@ -79,7 +79,7 @@ public class OpticalOdometry implements Subsystem {
         // telemetry.addData("x velocity: ", vel.x);
         // telemetry.addData("y velocity: ", vel.y);
 
-        telemetry.addData("h: ", currentPose.getHeading());
+        telemetry.addData("h: ", currentPose.getTheFinalDirection());
 
         poseTimer.reset();
 
@@ -93,7 +93,7 @@ public class OpticalOdometry implements Subsystem {
         otos.setPosition(new SparkFunOTOS.Pose2D(
                 newPose.getX(),
                 newPose.getY(),
-                Math.toDegrees(newPose.getHeading())
+                Math.toDegrees(newPose.getTheFinalDirection())
         ));
     }
 }

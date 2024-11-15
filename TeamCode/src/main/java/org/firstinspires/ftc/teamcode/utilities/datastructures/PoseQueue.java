@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.utilities.datastructures;
 
-import com.qualcomm.robotcore.util.ElapsedTime;
-
 import org.firstinspires.ftc.teamcode.utilities.math.linearalgebra.Pose;
 import org.firstinspires.ftc.teamcode.utilities.robot.RobotEx;
 
@@ -25,7 +23,7 @@ public class PoseQueue {
 
     public void addElement(Pose element) {
 
-        PoseElement elementObject = new PoseElement(element, robotInstance.runTime);
+        PoseElement elementObject = new PoseElement(element, robotInstance.theRunTime);
 
         elements.add(elementObject);
 

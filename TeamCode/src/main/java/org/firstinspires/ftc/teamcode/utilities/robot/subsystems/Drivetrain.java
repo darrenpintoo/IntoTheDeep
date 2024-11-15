@@ -3,7 +3,6 @@ package org.firstinspires.ftc.teamcode.utilities.robot.subsystems;
 import com.acmerobotics.dashboard.config.Config;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorEx;
-import com.qualcomm.robotcore.hardware.DcMotorSimple;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
@@ -13,8 +12,6 @@ import org.firstinspires.ftc.teamcode.utilities.physics.states.MecanumWheelState
 import org.firstinspires.ftc.teamcode.utilities.robot.RobotEx;
 import org.firstinspires.ftc.teamcode.utilities.robot.extensions.MotorGroup;
 import org.mercurialftc.mercurialftc.util.hardware.cachinghardwaredevice.CachingDcMotorEX;
-
-import java.util.ArrayList;
 
 /**
  * Robot Drivetrain
@@ -30,12 +27,12 @@ public class Drivetrain implements Subsystem {
         LEFT, RIGHT
     }
 
-    private RobotEx robotInstance;
+    private RobotEx theRobotInstance;
 
-    MotorGroup<DcMotorEx> drivetrainMotorGroup;
-    private DcMotorEx[] drivetrainMotors;
+    MotorGroup<DcMotorEx> theDriveTrainMotorGroup;
+    private DcMotorEx[] theDrivetrainMotors;
 
-    public DcMotorEx rightFrontMotor;
+    public DcMotorEx theRightFrontMotor;
     public DcMotorEx leftFrontMotor;
     public DcMotorEx leftBackMotor;
     public DcMotorEx rightBackMotor;
@@ -82,19 +79,19 @@ public class Drivetrain implements Subsystem {
     public static double LATERAL_MULTIPLIER = 1.33;
 
     @Override
-    public void onInit(HardwareMap newHardwareMap, Telemetry newTelemetry) {
+    public void onInit(HardwareMap aHardwareMap, Telemetry aTelemetry) {
 
-        this.robotInstance = RobotEx.getInstance();
+        this.theRobotInstance = RobotEx.getInstance();
 
-        rightFrontMotor = new CachingDcMotorEX((DcMotorEx) newHardwareMap.get(DcMotor.class, "rightFrontMotor"), 1e-5);
-        leftFrontMotor = new CachingDcMotorEX((DcMotorEx) newHardwareMap.get(DcMotor.class, "leftFrontMotor"), 1e-5);
-        leftBackMotor = new CachingDcMotorEX((DcMotorEx) newHardwareMap.get(DcMotor.class, "leftBackMotor"), 1e-5);
-        rightBackMotor = new CachingDcMotorEX((DcMotorEx) newHardwareMap.get(DcMotor.class, "rightBackMotor"), 1e-5);
+        theRightFrontMotor = new CachingDcMotorEX((DcMotorEx) aHardwareMap.get(DcMotor.class, "rightFrontMotor"), 1e-5);
+        leftFrontMotor = new CachingDcMotorEX((DcMotorEx) aHardwareMap.get(DcMotor.class, "leftFrontMotor"), 1e-5);
+        leftBackMotor = new CachingDcMotorEX((DcMotorEx) aHardwareMap.get(DcMotor.class, "leftBackMotor"), 1e-5);
+        rightBackMotor = new CachingDcMotorEX((DcMotorEx) aHardwareMap.get(DcMotor.class, "rightBackMotor"), 1e-5);
 
         // todo: figure out the directions
 
-        drivetrainMotors = new DcMotorEx[] {
-                this.rightFrontMotor,
+        theDrivetrainMotors = new DcMotorEx[] {
+                this.theRightFrontMotor,
                 this.leftFrontMotor,
                 this.leftBackMotor,
                 this.rightBackMotor
@@ -104,14 +101,14 @@ public class Drivetrain implements Subsystem {
         setRunMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         setRunMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
+        theRightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftFrontMotor.setDirection(DcMotorEx.Direction.REVERSE);
         leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
         rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
 
 
-        drivetrainMotorGroup = new MotorGroup<>(
-                this.rightFrontMotor,
+        theDriveTrainMotorGroup = new MotorGroup<>(
+                this.theRightFrontMotor,
                 this.leftFrontMotor,
                 this.leftBackMotor,
                 this.rightBackMotor
@@ -122,7 +119,7 @@ public class Drivetrain implements Subsystem {
         leftFrontPower = 0;
         rightFrontPower = 0;
 
-        telemetry = newTelemetry;
+        telemetry = aTelemetry;
     }
 
     public void enableAntiTip() {
@@ -143,7 +140,7 @@ public class Drivetrain implements Subsystem {
 
     @Override
     public void onOpmodeStarted() {
-        this.robotInstance = RobotEx.getInstance();
+        this.theRobotInstance = RobotEx.getInstance();
     }
 
     @Override
@@ -152,7 +149,7 @@ public class Drivetrain implements Subsystem {
         this.headingPID.updateCoefficients(Drivetrain.kP, Drivetrain.kI, Drivetrain.kD, 0);
 
         this.rightBackMotor.setPower(rightBackPower);
-        this.rightFrontMotor.setPower(rightFrontPower);
+        this.theRightFrontMotor.setPower(rightFrontPower);
         this.leftBackMotor.setPower(leftBackPower);
         this.leftFrontMotor.setPower(leftFrontPower);
 
@@ -189,7 +186,7 @@ public class Drivetrain implements Subsystem {
     }
 
     public void fieldCentricDriveFromGamepad(double leftJoystickY, double leftJoystickX, double rightJoystickX) {
-        double currentRobotOrientation = robotInstance.odometry.currentPose.getHeading() - Math.PI / 2;
+        double currentRobotOrientation = theRobotInstance.theOpticalOdometry.currentPose.getTheFinalDirection() - Math.PI / 2;
 
         this.robotCentricDriveFromGamepad(
                 Math.sin(-currentRobotOrientation) * leftJoystickX + Math.cos(-currentRobotOrientation) * leftJoystickY,
@@ -199,23 +196,23 @@ public class Drivetrain implements Subsystem {
     }
 
     public void setZeroPowerBehavior(DcMotorEx.ZeroPowerBehavior newZeroPowerBehavior) {
-        for (DcMotorEx drivetrainMotor : this.drivetrainMotors) {
+        for (DcMotorEx drivetrainMotor : this.theDrivetrainMotors) {
             drivetrainMotor.setZeroPowerBehavior(newZeroPowerBehavior);
         }
     }
 
     public void setRunMode(DcMotor.RunMode newRunMode) {
-        for (DcMotorEx drivetrainMotor : this.drivetrainMotors) {
+        for (DcMotorEx drivetrainMotor : this.theDrivetrainMotors) {
             drivetrainMotor.setMode(newRunMode);
         }
     }
 
-    public DcMotorEx[] getDrivetrainMotors() {
-        return this.drivetrainMotors;
+    public DcMotorEx[] getTheDrivetrainMotors() {
+        return this.theDrivetrainMotors;
     }
 
-    public MotorGroup<DcMotorEx> getDrivetrainMotorGroup() {
-        return this.drivetrainMotorGroup;
+    public MotorGroup<DcMotorEx> getTheDriveTrainMotorGroup() {
+        return this.theDriveTrainMotorGroup;
     }
 
     public DcMotor.ZeroPowerBehavior getZeroPowerBehavior() {
@@ -225,7 +222,7 @@ public class Drivetrain implements Subsystem {
 
     public int[] getCWMotorTicks() {
         return new int[] {
-                this.rightFrontMotor.getCurrentPosition(),
+                this.theRightFrontMotor.getCurrentPosition(),
                 this.leftFrontMotor.getCurrentPosition(),
                 this.leftBackMotor.getCurrentPosition(),
                 this.rightBackMotor.getCurrentPosition()
@@ -234,7 +231,7 @@ public class Drivetrain implements Subsystem {
 
     public MecanumWheelState getMotorTicks() {
         return new MecanumWheelState(
-                rightFrontMotor.getCurrentPosition(),
+                theRightFrontMotor.getCurrentPosition(),
                 leftFrontMotor.getCurrentPosition(),
                 leftBackMotor.getCurrentPosition(),
                 rightBackMotor.getCurrentPosition()
@@ -243,7 +240,7 @@ public class Drivetrain implements Subsystem {
 
     public MecanumWheelState getMotorVelocity() {
         return new MecanumWheelState(
-                rightFrontMotor.getVelocity(),
+                theRightFrontMotor.getVelocity(),
                 leftFrontMotor.getVelocity(),
                 leftBackMotor.getVelocity(),
                 rightBackMotor.getVelocity()

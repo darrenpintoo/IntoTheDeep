@@ -1,7 +1,5 @@
 package org.firstinspires.ftc.teamcode.utilities.robot.subsystems;
 
-import static org.firstinspires.ftc.robotcore.external.BlocksOpModeCompanion.telemetry;
-
 import com.qualcomm.hardware.limelightvision.LLResult;
 import com.qualcomm.hardware.limelightvision.Limelight3A;
 import com.qualcomm.robotcore.hardware.HardwareMap;
@@ -44,7 +42,7 @@ public class Limelight implements Subsystem {
     @Override
     public void onOpmodeStarted() {
         // if (limelight == null) return;
-        odometry = RobotEx.getInstance().odometry;
+        odometry = RobotEx.getInstance().theOpticalOdometry;
         // More setup
     }
 
@@ -52,7 +50,7 @@ public class Limelight implements Subsystem {
     public void onCyclePassed() {
         if (limelight == null) return;
 
-        limelight.updateRobotOrientation(Math.toDegrees(odometry.getPose().getHeading()));
+        limelight.updateRobotOrientation(Math.toDegrees(odometry.getPose().getTheFinalDirection()));
 
         Pose3D botpose = null;
         LLResult result = limelight.getLatestResult();
@@ -68,7 +66,7 @@ public class Limelight implements Subsystem {
 
         if (botpose != null) {
             Position botPosition = botpose.getPosition();
-            currentPose = new Pose(botPosition.x * 39.37, botPosition.y * 39.37, odometry.getPose().getHeading());
+            currentPose = new Pose(botPosition.x * 39.37, botPosition.y * 39.37, odometry.getPose().getTheFinalDirection());
 
         }
 
@@ -76,7 +74,7 @@ public class Limelight implements Subsystem {
         telemetry.addLine("--LIMELIGHT--");
         telemetry.addData("X: ", currentPose.getX());
         telemetry.addData("Y: ", currentPose.getY());
-        telemetry.addData("Heading: ", currentPose.getHeading());
+        telemetry.addData("Heading: ", currentPose.getTheFinalDirection());
         // Get the position of hte robot & store in a variable for access
     }
 

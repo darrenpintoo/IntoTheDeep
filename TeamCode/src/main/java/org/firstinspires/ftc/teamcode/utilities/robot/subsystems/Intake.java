@@ -137,9 +137,9 @@ public class Intake implements Subsystem {
             activeMotor.setPower(-0.5);
         } else if (currentIntakeState == IntakeState.EXTENDED && getCurrentPosition()-0.01 > LinkageStates.DEFAULT.position) {
             activeMotor.setPower(1);
-        } else if (RobotEx.getInstance().outtake.slidesTimer.seconds() < 1) {
+        } else if (RobotEx.getInstance().theOuttake.slidesTimer.seconds() < 1) {
             activeMotor.setPower(0.5);
-        } else if (RobotEx.getInstance().outtake.getClawState() == Outtake.OuttakeClawStates.CLOSED) {
+        } else if (RobotEx.getInstance().theOuttake.getClawState() == Outtake.OuttakeClawStates.CLOSED) {
             activeMotor.setPower(0.3);
         } else {
             activeMotor.setPower(0.);

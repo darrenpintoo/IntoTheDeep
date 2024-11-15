@@ -51,7 +51,7 @@ public class MainTeleop extends LinearOpMode {
 
         robot.update();
 
-        ElapsedTime e = new ElapsedTime();
+        ElapsedTime eTimer = new ElapsedTime();
 
         // robot.localizer.setPose(new Pose(-59, 15, Math.PI/2), true);
 
@@ -60,9 +60,9 @@ public class MainTeleop extends LinearOpMode {
 
         double frameTime = 0;
 
-        while (!robot.stopRequested) {
+        while (!robot.theStopRequested) {
 
-            e.reset();
+            eTimer.reset();
             // Retain information about the previous frame's gamepad
             previousFrameGamepad1.copy(currentFrameGamepad1);
             previousFrameGamepad2.copy(currentFrameGamepad2);
@@ -71,105 +71,105 @@ public class MainTeleop extends LinearOpMode {
             currentFrameGamepad2.copy(gamepad2);
 
 
-            robot.drivetrain.robotCentricDriveFromGamepad(
+            robot.theDrivetrain.robotCentricDriveFromGamepad(
                     -currentFrameGamepad1.left_stick_y,
                     currentFrameGamepad1.left_stick_x,
                     currentFrameGamepad1.right_stick_x
             );
 
             if (currentFrameGamepad2.right_trigger > 0) {
-                robot.outtake.setLiftPower(currentFrameGamepad2.right_trigger);
+                robot.theOuttake.setLiftPower(currentFrameGamepad2.right_trigger);
             } else {
-                robot.outtake.setLiftPower(-currentFrameGamepad2.left_trigger);
+                robot.theOuttake.setLiftPower(-currentFrameGamepad2.left_trigger);
             }
 
             if (currentFrameGamepad1.right_trigger > 0.05) {
-                robot.intake.incrementPositionByVelocity(currentFrameGamepad1.right_trigger, frameTime/1000);
+                robot.theIntake.incrementPositionByVelocity(currentFrameGamepad1.right_trigger, frameTime/1000);
             } else if (currentFrameGamepad1.left_trigger > 0.05) {
-                robot.intake.incrementPositionByVelocity(-currentFrameGamepad1.left_trigger, frameTime/1000);
+                robot.theIntake.incrementPositionByVelocity(-currentFrameGamepad1.left_trigger, frameTime/1000);
             }
 
             if (currentFrameGamepad1.left_bumper && !previousFrameGamepad1.left_bumper) {
-                robot.intake.setTargetLinkageState(Intake.LinkageStates.DEFAULT);
-                robot.intake.setIntakeState(Intake.IntakeState.DEFAULT);
+                robot.theIntake.setTargetLinkageState(Intake.LinkageStates.DEFAULT);
+                robot.theIntake.setIntakeState(Intake.IntakeState.DEFAULT);
             }
 
             if (currentFrameGamepad1.right_bumper && !previousFrameGamepad1.right_bumper) {
 
-                if (robot.intake.currentLinkageState == Intake.LinkageStates.DEFAULT) {
-                    robot.intake.setTargetLinkageState(Intake.LinkageStates.EXTENDED);
-                    robot.intake.setIntakeState(Intake.IntakeState.DEFAULT);
+                if (robot.theIntake.currentLinkageState == Intake.LinkageStates.DEFAULT) {
+                    robot.theIntake.setTargetLinkageState(Intake.LinkageStates.EXTENDED);
+                    robot.theIntake.setIntakeState(Intake.IntakeState.DEFAULT);
                 } else {
-                    robot.intake.setIntakeState(Intake.IntakeState.EXTENDED);
+                    robot.theIntake.setIntakeState(Intake.IntakeState.EXTENDED);
                 }
             }
 
             if (currentFrameGamepad1.circle) {
-                robot.intake.setIntakeState(Intake.IntakeState.DEFAULT);
-                robot.intake.reverseIntake();
+                robot.theIntake.setIntakeState(Intake.IntakeState.DEFAULT);
+                robot.theIntake.reverseIntake();
             } else if (previousFrameGamepad1.circle && !currentFrameGamepad1.circle) {
-                robot.intake.setIntakeState(Intake.IntakeState.EXTENDED);
+                robot.theIntake.setIntakeState(Intake.IntakeState.EXTENDED);
             }
 
             if (currentFrameGamepad2.dpad_up && !previousFrameGamepad2.dpad_up) {
-                robot.outtake.setSlidesState(Outtake.OuttakeSlidesStates.SAMPLES);
-                robot.outtake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
+                robot.theOuttake.setSlidesState(Outtake.OuttakeSlidesStates.SAMPLES);
+                robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
             }
 
             if (currentFrameGamepad2.dpad_left && !previousFrameGamepad2.dpad_left) {
-                robot.outtake.setSlidesState(Outtake.OuttakeSlidesStates.SPECIMENS);
-                robot.outtake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
+                robot.theOuttake.setSlidesState(Outtake.OuttakeSlidesStates.SPECIMENS);
+                robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
             }
 
             if (currentFrameGamepad2.dpad_right && !previousFrameGamepad2.dpad_right) {
-                robot.outtake.setSlidesState(Outtake.OuttakeSlidesStates.SPECIMENS_DROP);
+                robot.theOuttake.setSlidesState(Outtake.OuttakeSlidesStates.SPECIMENS_DROP);
             }
 
             if (currentFrameGamepad2.dpad_down && !previousFrameGamepad2.dpad_down) {
-                robot.outtake.setSlidesState(Outtake.OuttakeSlidesStates.HOVER);
-                robot.outtake.setCurrentRotationState(Outtake.OuttakeRotationStates.ROTATED);
-                robot.outtake.setCurrentClawState(Outtake.OuttakeClawStates.FULL_DEFAULT);
+                robot.theOuttake.setSlidesState(Outtake.OuttakeSlidesStates.HOVER);
+                robot.theOuttake.setCurrentRotationState(Outtake.OuttakeRotationStates.ROTATED);
+                robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.FULL_DEFAULT);
             }
 
             if (currentFrameGamepad2.right_bumper && !previousFrameGamepad2.right_bumper) {
-                robot.outtake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
+                robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
             }
 
             if (currentFrameGamepad2.left_bumper && !previousFrameGamepad2.left_bumper) {
-                robot.outtake.setCurrentClawState(Outtake.OuttakeClawStates.DEFAULT);
+                robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.DEFAULT);
             }
 
             if (currentFrameGamepad2.triangle && !previousFrameGamepad2.triangle) {
-                if (robot.outtake.getSlidesState() != Outtake.OuttakeSlidesStates.DEFAULT) {
-                    robot.outtake.setCurrentOuttakeState(Outtake.OuttakeServoState.BACK_PICKUP);
+                if (robot.theOuttake.getSlidesState() != Outtake.OuttakeSlidesStates.DEFAULT) {
+                    robot.theOuttake.setCurrentOuttakeState(Outtake.OuttakeServoState.BACK_PICKUP);
                 }
             }
 
             if (currentFrameGamepad2.circle && !previousFrameGamepad2.circle) {
-                robot.outtake.setCurrentOuttakeState(Outtake.OuttakeServoState.EXTENDED);
+                robot.theOuttake.setCurrentOuttakeState(Outtake.OuttakeServoState.EXTENDED);
             }
 
             if (currentFrameGamepad2.square && !previousFrameGamepad2.square) {
-                robot.outtake.setSlidesState(Outtake.OuttakeSlidesStates.DEFAULT);
-                robot.outtake.setCurrentOuttakeState(Outtake.OuttakeServoState.DEFAULT);
-                robot.outtake.setCurrentClawState(Outtake.OuttakeClawStates.DEFAULT);
-                robot.outtake.setCurrentRotationState(Outtake.OuttakeRotationStates.DEFAULT);
+                robot.theOuttake.setSlidesState(Outtake.OuttakeSlidesStates.DEFAULT);
+                robot.theOuttake.setCurrentOuttakeState(Outtake.OuttakeServoState.DEFAULT);
+                robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.DEFAULT);
+                robot.theOuttake.setCurrentRotationState(Outtake.OuttakeRotationStates.DEFAULT);
             }
 
             if (currentFrameGamepad1.square && !previousFrameGamepad1.square) {
-                robot.intake.setIntakeState(Intake.IntakeState.EXTENDED);
+                robot.theIntake.setIntakeState(Intake.IntakeState.EXTENDED);
             }
 
             if (currentFrameGamepad1.cross && !previousFrameGamepad1.cross) {
-                robot.intake.setIntakeState(Intake.IntakeState.PUSH_DOWN);
+                robot.theIntake.setIntakeState(Intake.IntakeState.PUSH_DOWN);
             }
 
             if (currentFrameGamepad1.triangle && !previousFrameGamepad1.triangle) {
-                robot.intake.setIntakeState(Intake.IntakeState.UP);
+                robot.theIntake.setIntakeState(Intake.IntakeState.UP);
             }
 
             if (currentFrameGamepad1.cross && !previousFrameGamepad1.cross) {
-                robot.odometry.setPose(robot.limelight.getPose());
+                robot.theOpticalOdometry.setPose(robot.theLimelight.getPose());
             }
 
             if (currentFrameGamepad1.square && !previousFrameGamepad1.square) {

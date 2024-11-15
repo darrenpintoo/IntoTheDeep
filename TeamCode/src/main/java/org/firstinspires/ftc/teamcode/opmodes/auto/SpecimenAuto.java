@@ -11,7 +11,6 @@ import org.firstinspires.ftc.teamcode.utilities.math.linearalgebra.Pose;
 import org.firstinspires.ftc.teamcode.utilities.robot.RobotEx;
 import org.firstinspires.ftc.teamcode.utilities.robot.movement.PIDDrive;
 import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Intake;
-import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Outtake;
 
 /**
  * Example teleop code for a basic mecanum drive
@@ -34,7 +33,7 @@ public class SpecimenAuto extends LinearOpMode {
 
         waitForStart();
 
-        robot.intake.setIntakeState(Intake.IntakeState.EXTENDED);
+        robot.theIntake.setIntakeState(Intake.IntakeState.EXTENDED);
         // Notify subsystems before loop
         robot.postInit();
 
@@ -58,7 +57,7 @@ public class SpecimenAuto extends LinearOpMode {
 
         PIDDrive drive = new PIDDrive(robot, this, telemetry);
 
-        robot.odometry.setPose(new Pose(0, 0, -Math.PI / 2));
+        robot.theOpticalOdometry.setPose(new Pose(0, 0, -Math.PI / 2));
 
 
 

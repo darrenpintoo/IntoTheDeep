@@ -4,11 +4,9 @@ import com.acmerobotics.dashboard.FtcDashboard;
 import com.acmerobotics.dashboard.telemetry.MultipleTelemetry;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Gamepad;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.teamcode.utilities.math.MathHelper;
 import org.firstinspires.ftc.teamcode.utilities.math.linearalgebra.Pose;
 import org.firstinspires.ftc.teamcode.utilities.robot.RobotEx;
 import org.firstinspires.ftc.teamcode.utilities.robot.movement.PIDDrive;
@@ -52,7 +50,7 @@ public class DriveForward extends LinearOpMode {
 
         PIDDrive drive = new PIDDrive(robot, this, telemetry);
 
-        robot.odometry.setPose(new Pose(0, 0, 0));
+        robot.theOpticalOdometry.setPose(new Pose(0, 0, 0));
 
         robot.pause(0.5);
 
