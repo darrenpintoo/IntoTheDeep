@@ -28,9 +28,9 @@ public class PIDDrive {
 
     GeneralPIDController xController = new GeneralPIDController(0.2, 0, 1, 0);
     GeneralPIDController yController = new GeneralPIDController(0.2, 0, 1, 0);
-    GeneralPIDController headingController = new GeneralPIDController(1.5, 0, 0, 0);
+    GeneralPIDController headingController = new GeneralPIDController(0.2, 0, 0, 0);
 
-    public static double vMax = 50;
+    public static double vMax = 20;
     public static double aMax = 40;
 
     public static double kA = 0.0035;

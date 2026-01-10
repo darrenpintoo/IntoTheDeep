@@ -100,6 +100,7 @@ public class NewTeleop extends LinearOpMode {
 
         while (opModeInInit()) {
             telemetry.addData("Alliance", currentAlliance.name());
+            telemetry.addData("Circle for blue", "Square for red");
             telemetry.update();
 
             if (gamepad1.circle) {
