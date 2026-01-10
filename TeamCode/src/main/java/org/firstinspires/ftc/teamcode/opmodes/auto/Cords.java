@@ -17,9 +17,9 @@ import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandt
 import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandtypes.ParallelCommandGroup;
 import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandtypes.SequentialCommandGroup;
 import org.firstinspires.ftc.teamcode.utilities.robot.command.framework.commandtypes.YieldCommand;
-import org.firstinspires.ftc.teamcode.utilities.robot.command.movement.InitialCycleCommand1;
+//import org.firstinspires.ftc.teamcode.utilities.robot.command.movement.InitialCycleCommand1;
 import org.firstinspires.ftc.teamcode.utilities.robot.command.movement.MovementCommand;
-import org.firstinspires.ftc.teamcode.utilities.robot.command.movement.RetryCommand;
+//import org.firstinspires.ftc.teamcode.utilities.robot.command.movement.RetryCommand;
 import org.firstinspires.ftc.teamcode.utilities.robot.movement.MovementConstants;
 import org.firstinspires.ftc.teamcode.utilities.robot.movement.PIDDrive;
 import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Intake;
@@ -66,7 +66,7 @@ public class Cords extends LinearOpMode {
         // Initialize the robot
         robot.init(this, telemetry);
 
-        robot.theIntake.setDisableOuttake(true);
+//        robot.theIntake.setDisableOuttake(true);
 
         boolean doneWithInitial = false;
         boolean doneWithPreloads = false;
@@ -391,11 +391,11 @@ public class Cords extends LinearOpMode {
                 new OneTimeCommand(() -> robot.theOuttake.setCurrentOuttakeState(Outtake.OuttakeServoState.AUTO_PARK))
         );
 */
-        SequentialCommandGroup retryCommand = new RetryCommand(robot, 0);
+//        SequentialCommandGroup retryCommand = new RetryCommand(robot, 0);
 
-        robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
-        robot.theIntake.leftServo.setPosition(Intake.LinkageStates.DEFAULT.position - 0.03);
-        robot.theIntake.rightServo.setPosition(Intake.LinkageStates.DEFAULT.position - 0.03);
+//        robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
+//        robot.theIntake.leftServo.setPosition(Intake.LinkageStates.DEFAULT.position - 0.03);
+//        robot.theIntake.rightServo.setPosition(Intake.LinkageStates.DEFAULT.position - 0.03);
 
         Gamepad gamepad1Copy = new Gamepad();
         Gamepad gamepad2Copy = new Gamepad();
@@ -403,14 +403,14 @@ public class Cords extends LinearOpMode {
         double offset = 0;
 
         while (opModeInInit()) {
-            if (gamepad1.cross) {
-                robot.theOuttake.clawServo.setPosition(Outtake.OuttakeClawStates.CLOSED.position);
-            }
-
-            if (gamepad1.circle) {
-                robot.theIntake.leftDropdownServo.setPosition(Intake.IntakeState.AUTO_DEFAULT.position);
-                robot.theIntake.rightDropdownServo.setPosition(Intake.IntakeState.AUTO_DEFAULT.position);
-            }
+//            if (gamepad1.cross) {
+//                robot.theOuttake.clawServo.setPosition(Outtake.OuttakeClawStates.CLOSED.position);
+//            }
+//
+//            if (gamepad1.circle) {
+//                robot.theIntake.leftDropdownServo.setPosition(Intake.IntakeState.AUTO_DEFAULT.position);
+//                robot.theIntake.rightDropdownServo.setPosition(Intake.IntakeState.AUTO_DEFAULT.position);
+//            }
 
          /*   if (gamepad1.dpad_left && !gamepad1Copy.dpad_left) {
                 System.out.println("Left offset");
@@ -435,11 +435,11 @@ public class Cords extends LinearOpMode {
                 Globals.ALLIANCE = Alliance.BLUE;
             }
 
-            if (gamepad2.cross) {
-                submersibleCycle = false;
-            } else if (gamepad2.square) {
-                submersibleCycle = true;
-            }
+//            if (gamepad2.cross) {
+//                submersibleCycle = false;
+//            } else if (gamepad2.square) {
+//                submersibleCycle = true;
+//            }
 
             telemetry.addLine("Press cross (gamepad1) to close claw");
             telemetry.addLine("Press circle (gamepad1) to set intake dropdown servos to AUTO_DEFAULT");
@@ -458,8 +458,8 @@ public class Cords extends LinearOpMode {
             gamepad1.copy(gamepad1Copy);
         }
         waitForStart();
-        robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
-        robot.theOuttake.setCurrentOuttakeState(Outtake.OuttakeServoState.AUTO_DEFAULT);
+//        robot.theOuttake.setCurrentClawState(Outtake.OuttakeClawStates.CLOSED);
+//        robot.theOuttake.setCurrentOuttakeState(Outtake.OuttakeServoState.AUTO_DEFAULT);
 
         // Notify subsystems before loop
         robot.postStart();
@@ -581,7 +581,7 @@ public class Cords extends LinearOpMode {
                 }
             }
 */
-            telemetry.addData("Sample contained: ", robot.theIntake.sampleContained);
+//            telemetry.addData("Sample contained: ", robot.theIntake.sampleContained);
             telemetry.addData("Retry: ", retriedPickup);
             telemetry.addData("Done with preloads: ", doneWithPreloads);
             telemetry.addData("Done with initial: ", doneWithInitial);

@@ -20,6 +20,7 @@ import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.OpticalOdometry
 import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Outtake;
 import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.PinpointOdometry;
 import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Subsystem;
+import org.firstinspires.ftc.teamcode.utilities.robot.subsystems.Turret;
 
 
 import java.util.List;
@@ -60,6 +61,7 @@ public class RobotEx {
     public Localizer theLocalizer = new PinpointOdometry();
     public Outtake theOuttake = new Outtake();
     public Intake theIntake = new Intake();
+    public Turret theTurret = new Turret();
     public Limelight theLimelight = new Limelight();
 
     public VoltageSensor theVoltageSensor;
@@ -71,7 +73,8 @@ public class RobotEx {
             theLocalizer,
             theOuttake,
             theIntake,
-            theLimelight
+            theLimelight,
+            theTurret
     };
 
     public Telemetry theTelemetry;

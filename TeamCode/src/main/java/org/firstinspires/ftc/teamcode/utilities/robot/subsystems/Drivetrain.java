@@ -116,8 +116,8 @@ public class Drivetrain implements Subsystem {
 
         rightFrontMotor.setDirection(DcMotorEx.Direction.FORWARD);
         leftFrontMotor.setDirection(DcMotorEx.Direction.REVERSE);
-        leftBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
-        rightBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
+        leftBackMotor.setDirection(DcMotorEx.Direction.FORWARD);
+        rightBackMotor.setDirection(DcMotorEx.Direction.REVERSE);
 
         rightFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
         leftFrontMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
