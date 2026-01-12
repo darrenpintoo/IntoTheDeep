@@ -247,6 +247,8 @@ public class LowRedAuto extends LinearOpMode {
             if (gamepad1.square) {
                 currentAlliance = Alliance.RED;
             }
+            leftTurretServo.setPosition(0.6);
+            rightTurretServo.setPosition(0.6);
         }
 
         runtime.reset();
@@ -287,20 +289,20 @@ public class LowRedAuto extends LinearOpMode {
 
             robot.theTurret.center(currentAlliance, (MultipleTelemetry) telemetry);
 
-            rightPivotServo.setPosition(0.25);
-            leftPivotServo.setPosition(0.25);
+            rightPivotServo.setPosition(0.35);
+            leftPivotServo.setPosition(0.35);
 
             if (runtime.milliseconds() < 2000) {
                 leftFrontMotor.setPower(0);
                 leftBackMotor.setPower(0);
                 rightFrontMotor.setPower(0);
                 rightBackMotor.setPower(0);
-            } else if (runtime.milliseconds() < 3000) {
-                leftFrontMotor.setPower(-0.5);
-                leftBackMotor.setPower(-0.5);
-                rightFrontMotor.setPower(-0.5);
-                rightBackMotor.setPower(-0.5);
-            } else if (runtime.milliseconds() < 5000) {
+            } else if (runtime.milliseconds() < 5500) {
+                leftFrontMotor.setPower(-0.3);
+                leftBackMotor.setPower(-0.3);
+                rightFrontMotor.setPower(-0.3);
+                rightBackMotor.setPower(-0.3);
+            } else if (runtime.milliseconds() < 8000) {
                 leftFrontMotor.setPower(0);
                 leftBackMotor.setPower(0);
                 rightFrontMotor.setPower(0);
@@ -308,8 +310,8 @@ public class LowRedAuto extends LinearOpMode {
                 robot.theOuttake.outtake();
 //                rightOuttakeMotor.setPower(1.0);
 //                leftOuttakeMotor.setPower(1.0);
-            } else if (runtime.milliseconds() < 11000) {
-                for (int i = 0; i < 3; i++) {
+            } else if (runtime.milliseconds() < 18000) {
+                for (int i = 0; i < 4; i++) {
                     robot.theOuttake.transfer();
 //                    leftIntakeMotor.setPower(0.0);
 //                    rightIntakeMotor.setPower(0.0);
@@ -335,14 +337,15 @@ public class LowRedAuto extends LinearOpMode {
 //                        rightIntakeMotor.setPower(0.0);
 //                    }
                 }
-            } else if (runtime.milliseconds() < 12000) {
+            } else if (runtime.milliseconds() < 19000) {
                 robot.theOuttake.stopOuttake();
+                robot.theIntake.stopIntake();
 //                rightOuttakeMotor.setPower(0.0);
 //                leftOuttakeMotor.setPower(0.0);
-                leftFrontMotor.setPower(1.0);
-                leftBackMotor.setPower(1.0);
-                rightFrontMotor.setPower(-1.0);
-                rightBackMotor.setPower(-1.0);
+                leftFrontMotor.setPower(0.5);
+                leftBackMotor.setPower(0.5);
+                rightFrontMotor.setPower(-0.5);
+                rightBackMotor.setPower(-0.5);
             } else {
                 leftFrontMotor.setPower(0);
                 leftBackMotor.setPower(0);

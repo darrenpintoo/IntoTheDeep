@@ -49,6 +49,14 @@ public class Outtake implements Subsystem {
         rightOuttakeMotor.setPower(1.0);
         transferTime.reset();
 
+        while (transferTime.milliseconds() < 500) {
+            leftIntakeMotor.setPower(0.0);
+            rightIntakeMotor.setPower(0.0);
+            leftOuttakeMotor.setPower(1.0);
+            rightOuttakeMotor.setPower(1.0);
+        }
+
+        transferTime.reset();
         while (transferTime.milliseconds() < 200) {
             leftTransferServo.setPosition(0.10);
             rightTransferServo.setPosition(0.10);
@@ -61,7 +69,7 @@ public class Outtake implements Subsystem {
             rightIntakeMotor.setPower(0.0);
             leftIntakeMotor.setPower(0.0);
         }
-        while (transferTime.milliseconds() < 1000) {
+        while (transferTime.milliseconds() < 2000) {
             rightIntakeMotor.setPower(1.0);
             leftIntakeMotor.setPower(1.0);
         }

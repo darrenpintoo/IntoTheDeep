@@ -34,11 +34,11 @@ public class Turret implements Subsystem {
             if ((id == 20 && currentAlliance == Alliance.BLUE) || (id == 24 && currentAlliance == Alliance.RED)) {
                 tx = result.getTx();
                 telemetry.addData("tx", tx);
-            } else {
-                tx = 500.0;
-            }
+            } //else {
+//                tx = 0.0;
+//            }
         } else {
-            tx = 500.0;
+            // tx = 0.0;
             telemetry.addData("The thingy is broken", "because of the limelight");
         }
         double ltpos = leftTurretServo.getPosition();

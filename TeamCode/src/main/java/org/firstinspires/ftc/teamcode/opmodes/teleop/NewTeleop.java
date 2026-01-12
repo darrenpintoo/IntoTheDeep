@@ -109,6 +109,9 @@ public class NewTeleop extends LinearOpMode {
             if (gamepad1.square) {
                 currentAlliance = Alliance.RED;
             }
+
+            leftTurretServo.setPosition(0.5);
+            rightTurretServo.setPosition(0.5);
         }
 
         runtime.reset();
@@ -251,7 +254,8 @@ public class NewTeleop extends LinearOpMode {
 //                    leftIntakeMotor.setPower(1.0);
 //                }
             }
-
+            leftTurretServo.setPosition(0.5);
+            rightTurretServo.setPosition(0.5);
             telemetry.addData("Status", "Run Time:" + runtime.toString());
             telemetry.addData("Front left/Right", "%4.2f, %4.2f", leftFrontPower, rightFrontPower);
             telemetry.addData("Back left/Right", "%4.2f, %4.2f", leftBackPower, rightBackPower);
